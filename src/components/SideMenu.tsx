@@ -2,6 +2,7 @@ import {
   BookOpen,
   FolderClock,
   MessageSquareMore,
+  Package,
   Settings,
   SquareTerminal,
 } from "lucide-react";
@@ -34,6 +35,13 @@ export const SideMenu = () => {
       icon: <FolderClock className="h-4 w-4" />,
       token: "/history",
       disabled: true,
+    },
+    {
+      url: "/rags/search",
+      name: "RAGs",
+      icon: <Package className="h-4 w-4" />,
+      token: "/rags",
+      disabled: false,
     },
     {
       url: "/settings/general",

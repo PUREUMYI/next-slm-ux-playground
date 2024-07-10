@@ -48,7 +48,6 @@ const GeneralPage = () => {
             <Link href="#" className="font-semibold text-primary">
               Keys
             </Link>
-            <Link href="/underconstruction">Github</Link>
           </nav>
           <div className="grid gap-6">
             <Card x-chunk="dashboard-04-chunk-1">
