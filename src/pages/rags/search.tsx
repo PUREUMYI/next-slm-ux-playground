@@ -29,7 +29,7 @@ const GeneralPage = () => {
             className="grid gap-4 text-sm text-muted-foreground"
             x-chunk="dashboard-04-chunk-0"
           >
-            <Link href="/underconstruction">Github</Link>
+            <Link href="/rags/github-list">Github</Link>
             <Link href="#" className="font-semibold text-primary">
               Search
             </Link>

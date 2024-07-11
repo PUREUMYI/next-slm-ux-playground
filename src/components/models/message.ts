@@ -30,3 +30,13 @@ export type LocalModel = {
   paramSize: string;
   quantizationLevel: string;
 };
+
+export type GithubRAGsModel = {
+  repoName: string;
+  fileType: string;
+  files: number;
+  creationDate: string;
+  models: string;
+  regenerate: string;
+  remove: string;
+};
