@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/table";
 import { Label } from "@radix-ui/react-label";
 import { Separator } from "@radix-ui/react-select";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -119,20 +120,30 @@ const GithubListPage = () => {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead className="w-[250px]">Repo Name</TableHead>
-                        <TableHead className="w-[120px]">File Type</TableHead>
-                        <TableHead className="w-[100px]">Size</TableHead>
-                        <TableHead className="w-[200px]">
+                        <TableHead className="text-center w-[300px]">
+                          Repo Name
+                        </TableHead>
+                        <TableHead className="text-center w-[120px]">
+                          File Type
+                        </TableHead>
+                        <TableHead className="text-center w-[100px]">
+                          Size
+                        </TableHead>
+                        <TableHead className="text-center w-[200px]">
                           Creation Date
                         </TableHead>
-                        <TableHead className="text-center">Models</TableHead>
-                        <TableHead className="text-center">
+                        <TableHead className="text-center w-[80px]">
+                          Models
+                        </TableHead>
+                        <TableHead className="text-center w-[80px]">
                           Regenerate
                         </TableHead>
-                        <TableHead className="text-center">Remove</TableHead>
+                        <TableHead className="text-center w-[80px]">
+                          Remove
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody className="text-black">
                       {githubRAGsModel.map((githubRAG, index) => (
                         <TableRow key={index}>
                           <TableCell className="font-medium">
@@ -147,14 +158,29 @@ const GithubListPage = () => {
                           <TableCell className="text-center">
                             {githubRAG.creationDate}
                           </TableCell>
-                          <TableCell className="text-center">
-                            {githubRAG.models}
+                          <TableCell className="items-center">
+                            <Image
+                              src="/images/add.png"
+                              alt={githubRAG.models}
+                              width={20}
+                              height={20}
+                            />
                           </TableCell>
-                          <TableCell className="text-center">
-                            {githubRAG.regenerate}
+                          <TableCell className="">
+                            <Image
+                              src="/images/refresh.png"
+                              alt={githubRAG.regenerate}
+                              width={20}
+                              height={20}
+                            />
                           </TableCell>
-                          <TableCell className="text-center">
-                            {githubRAG.remove}
+                          <TableCell className="">
+                            <Image
+                              src="/images/delete.png"
+                              alt={githubRAG.remove}
+                              width={20}
+                              height={20}
+                            />
                           </TableCell>
                         </TableRow>
                       ))}
