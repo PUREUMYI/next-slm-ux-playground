@@ -19,9 +19,10 @@ import {
 } from "@/components/ui/table";
 import { Label } from "@radix-ui/react-label";
 import { Separator } from "@radix-ui/react-select";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+import { CopyPlus, PackageX, RefreshCw } from 'lucide-react';
 
 const GithubListPage = () => {
   const [githubRAGsModel, setGithubRAGsModel] = useState<GithubRAGsModel[]>([
@@ -158,29 +159,14 @@ const GithubListPage = () => {
                           <TableCell className="text-center">
                             {githubRAG.creationDate}
                           </TableCell>
-                          <TableCell className="items-center">
-                            <Image
-                              src="/images/add.png"
-                              alt={githubRAG.models}
-                              width={20}
-                              height={20}
-                            />
+                          <TableCell align={"center"}>
+                            <CopyPlus />
                           </TableCell>
-                          <TableCell className="">
-                            <Image
-                              src="/images/refresh.png"
-                              alt={githubRAG.regenerate}
-                              width={20}
-                              height={20}
-                            />
+                          <TableCell align={"center"}>
+                            <RefreshCw />
                           </TableCell>
-                          <TableCell className="">
-                            <Image
-                              src="/images/delete.png"
-                              alt={githubRAG.remove}
-                              width={20}
-                              height={20}
-                            />
+                          <TableCell align={"center"}>
+                            <PackageX />
                           </TableCell>
                         </TableRow>
                       ))}
