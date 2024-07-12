@@ -30,6 +30,7 @@ const GeneralPage = () => {
             x-chunk="dashboard-04-chunk-0"
           >
             <Link href="/underconstruction">Github</Link>
+            <Link href="/rags/githubadd">Github Add (Temp)</Link>
             <Link href="#" className="font-semibold text-primary">
               Search
             </Link>
