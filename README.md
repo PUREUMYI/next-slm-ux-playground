@@ -28,3 +28,111 @@ npm run dev
 # or
 yarn dev
 ```
+
+## API Documentation
+
+### # GET /api/histories
+
+> Retrieves a list of histories. Optionally filters posts by message.
+
+**Query Parameters:**
+
+- `message` (optional): The message text to filter by.
+
+**Response:**
+
+- `200`: Returns an array of `SlmMessageHistory` objects.
+
+```json
+[
+  {
+    "id": 1,
+    "messages": [
+      {
+        "role": "human",
+        "message": "Hello World!!"
+      },
+      {
+        "role": "ai",
+        "message": "Wow!!!!"
+      }
+    ],
+    "creationDate": "20240712214350"
+  },
+  ...
+]
+```
+
+### # POST /api/histories
+
+> Creates a new history.
+
+**Request Body:**
+
+```json
+{
+  "messages": [
+    {
+      "role": "human",
+      "message": "Hello World!!"
+    },
+    {
+      "role": "ai",
+      "message": "Wow!!!!"
+    }
+  ]
+}
+```
+
+**Responses:**
+
+- `201`: Returns the created `SlmMessageHistory` objects.
+
+```json
+[
+  {
+    "id": 1,
+    "messages": [
+      {
+        "role": "human",
+        "message": "Hello World!!"
+      },
+      {
+        "role": "ai",
+        "message": "Wow!!!!"
+      }
+    ],
+    "creationDate": "20240712214350"
+  },
+  ...
+}
+```
+
+### # GET /api/history
+
+> Retrieve a history
+
+**Query Parameters:**
+
+- `id` (required): The message text to filter by.
+
+**Response:**
+
+- `200`: Returns a `SlmMessageHistory` objects.
+
+```json
+{
+  "id": 1,
+  "messages": [
+    {
+      "role": "human",
+      "message": "Hello World!!"
+    },
+    {
+      "role": "ai",
+      "message": "Wow!!!!"
+    }
+  ],
+  "creationDate": "20240712214350"
+}
+```
