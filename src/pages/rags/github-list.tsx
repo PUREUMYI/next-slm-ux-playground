@@ -22,7 +22,17 @@ import { Separator } from "@radix-ui/react-select";
 import Link from "next/link";
 import { useState } from "react";
 
-import { CopyPlus, PackageX, RefreshCw } from 'lucide-react';
+import { CopyPlus, PackageX, RefreshCw } from "lucide-react";
+
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const GithubListPage = () => {
   const [githubRAGsModel, setGithubRAGsModel] = useState<GithubRAGsModel[]>([
@@ -160,7 +170,75 @@ const GithubListPage = () => {
                             {githubRAG.creationDate}
                           </TableCell>
                           <TableCell align={"center"}>
-                            <CopyPlus />
+                            <Dialog>
+                              <DialogTrigger asChild>
+                                <CopyPlus />
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-[600px] sm:max-h-[600px]">
+                                <DialogHeader>
+                                  <DialogTitle>Step I. Github Info</DialogTitle>
+                                  <DialogDescription>
+                                    Change general settings on Gihug RAG.
+                                  </DialogDescription>
+                                </DialogHeader>
+
+                                <Table>
+                                  <TableHeader>
+                                    <TableRow>
+                                      <TableHead className="text-center w-[300px]">
+                                        <Label
+                                          htmlFor="owner"
+                                          className="text-right"
+                                        >
+                                          Owner
+                                        </Label>
+                                      </TableHead>
+                                      <TableHead className="text-center w-[300px]">
+                                        <Label
+                                          htmlFor="owner"
+                                          className="text-right"
+                                        >
+                                          Repo
+                                        </Label>
+                                      </TableHead>
+                                    </TableRow>
+                                  </TableHeader>
+                                  <TableBody className="text-black ">
+                                    <TableRow key={index}>
+                                      <TableCell className="font-medium grid gap-4 py-4">
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                          <Input
+                                            id="owner"
+                                            defaultValue=""
+                                            className="col-span-3"
+                                          />
+                                        </div>
+                                      </TableCell>
+                                      <TableCell className="text-center">
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                          <Input
+                                            id="repo"
+                                            defaultValue=""
+                                            className="col-span-3"
+                                          />
+                                        </div>
+                                      </TableCell>
+                                    </TableRow>
+                                  </TableBody>
+                                </Table>
+
+                                <div className="grid w-full gap-1.5">
+                                  <p className="text-sm text-muted-foreground">
+                                    The final generaled URL will be
+                                    https://github.com/(owner/(repo)
+                                  </p>
+                                </div>
+
+                                <DialogFooter>
+                                  <Button type="submit">Add target</Button>
+                                </DialogFooter>
+                              </DialogContent>
+                            </Dialog>
                           </TableCell>
                           <TableCell align={"center"}>
                             <RefreshCw />
@@ -173,6 +251,9 @@ const GithubListPage = () => {
                     </TableBody>
                   </Table>
                 </CardContent>
+                <CardFooter className="border-t px-6 py-4">
+                  <Button>Create</Button>
+                </CardFooter>
               </Card>
             </Card>
           </div>
