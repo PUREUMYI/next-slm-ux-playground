@@ -178,7 +178,7 @@ export const GithubAdd = ({}) => {
           {/* step3 button area */}
           <div className="mt-5">
             <Button>Create DB</Button>
-          </div>
+          </div> 
         </div>
       </div>
     </div>
