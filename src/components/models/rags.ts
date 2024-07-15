@@ -8,7 +8,7 @@ export enum FileType {
 export interface GithubInfo {
   token: string;
   url: string;
-  updatedDate: string;
+  updatedDate?: string;
 }
 
 export interface Rag {
@@ -16,7 +16,7 @@ export interface Rag {
   owner: string;
   repo: number;
   ragTargets: RagTarget[];
-  updatedDate: string;
+  updatedDate?: string;
 }
 
 export interface RagTarget {
