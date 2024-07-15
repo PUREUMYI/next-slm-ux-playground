@@ -1,4 +1,8 @@
-import { SlmMessageHistory } from "@/components/models/message";
+import {
+  SlmMessage,
+  SlmMessageHistory,
+  SlmSettings,
+} from "@/components/models/message";
 import initDB from "@/components/store/db";
 import moment from "moment";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -30,12 +34,23 @@ export default async function handler(
       break;
 
     case "POST":
+      const {
+        system,
+        messages,
+        settings,
+        ragId,
+      }: {
+        system: string;
+        messages: SlmMessage[];
+        settings: SlmSettings;
+        ragId: number;
+      } = req.body;
       const history: SlmMessageHistory = {
         id: (db.data.sequences.histories += 1),
-        system: req.body.system,
-        messages: req.body.messages,
-        settings: req.body.settings,
-        rag: req.body.rag,
+        system,
+        messages,
+        settings,
+        ragId,
         updatedDate: moment().format("YYYYMMDDHHmmss"),
       };
       db.data?.histories.push(history);

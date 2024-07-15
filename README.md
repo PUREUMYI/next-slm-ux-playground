@@ -33,20 +33,21 @@ yarn dev
 
 ### # GET /api/histories
 
-> Retrieves a list of histories. Optionally filters posts by message.
+> 메시지 이력을 조회
 
 **Query Parameters:**
 
-- `message` (optional): The message text to filter by.
+- `message` (optional): message 검색조건
 
 **Response:**
 
-- `200`: Returns an array of `SlmMessageHistory` objects.
+- `200`: 결과에 대응하는 `SlmMessageHistory` Array 객체를 반환
 
 ```json
 [
   {
     "id": 1,
+    "system": "This is System messages...",
     "messages": [
       {
         "role": "human",
@@ -57,7 +58,14 @@ yarn dev
         "message": "Wow!!!!"
       }
     ],
-    "creationDate": "20240712214350"
+    "settings": {
+      "model": "gpt-4o",
+      "temperature": 0.5,
+      "maxLength": 4096,
+      "topP": 1
+    },
+    "ragId": 1,
+    "updatedDate": "20240715220140"
   },
   ...
 ]
@@ -65,64 +73,13 @@ yarn dev
 
 ### # POST /api/histories
 
-> Creates a new history.
+> 새로운 메시지 이력을 생성
 
 **Request Body:**
 
 ```json
 {
-  "messages": [
-    {
-      "role": "human",
-      "message": "Hello World!!"
-    },
-    {
-      "role": "ai",
-      "message": "Wow!!!!"
-    }
-  ]
-}
-```
-
-**Responses:**
-
-- `201`: Returns the created `SlmMessageHistory` objects.
-
-```json
-[
-  {
-    "id": 1,
-    "messages": [
-      {
-        "role": "human",
-        "message": "Hello World!!"
-      },
-      {
-        "role": "ai",
-        "message": "Wow!!!!"
-      }
-    ],
-    "creationDate": "20240712214350"
-  },
-  ...
-}
-```
-
-### # GET /api/history
-
-> Retrieve a history
-
-**Query Parameters:**
-
-- `id` (required): The message text to filter by.
-
-**Response:**
-
-- `200`: Returns a `SlmMessageHistory` objects.
-
-```json
-{
-  "id": 1,
+  "system": "This is System messages...",
   "messages": [
     {
       "role": "human",
@@ -133,6 +90,286 @@ yarn dev
       "message": "Wow!!!!"
     }
   ],
-  "creationDate": "20240712214350"
+  "settings": {
+    "model": "gpt-4o",
+    "temperature": 0.5,
+    "maxLength": 4096,
+    "topP": 1
+  },
+  "ragId": 1
 }
 ```
+
+**Responses:**
+
+- `201`: 생성된 `SlmMessageHistory` 객체를 반환.
+
+### # GET /api/history
+
+> id에 대응하는 메시지 객체를 반환
+
+**Query Parameters:**
+
+- `id` (required): 메시지 객체의 ID
+
+**Response:**
+
+- `200`: `SlmMessageHistory` 객체를 반환
+
+```json
+{
+  "id": 1,
+  "system": "This is System messages...",
+  "messages": [
+    {
+      "role": "human",
+      "message": "Hello World!!"
+    },
+    {
+      "role": "ai",
+      "message": "Wow!!!!"
+    }
+  ],
+  "settings": {
+    "model": "gpt-4o",
+    "temperature": 0.5,
+    "maxLength": 4096,
+    "topP": 1
+  },
+  "ragId": 1,
+  "updatedDate": "20240715220752"
+}
+```
+
+- `404`: `id`에 대응하는 메시지가 없는 경우
+- `400`: `id`가 전달되지 않았을 경우
+
+### # PUT /api/history
+
+> id에 대응하는 메시지 이력을 수정
+
+**Request Body:**
+
+```json
+{
+  "id": 2,
+  "messages": [
+    {
+      "role": "human",
+      "message": "Hello World!! _2"
+    },
+    {
+      "role": "ai",
+      "message": "Wow!!!! _2"
+    }
+  ]
+}
+```
+
+**Responses:**
+
+- `201`: 수정된 `SlmMessageHistory` 객체를 반환.
+
+```json
+{
+  "id": 2,
+  "system": "This is System messages...",
+  "messages": [
+    {
+      "role": "human",
+      "message": "Hello World!! _2"
+    },
+    {
+      "role": "ai",
+      "message": "Wow!!!! _2"
+    }
+  ],
+  "settings": {
+    "model": "gpt-4o",
+    "temperature": 0.5,
+    "maxLength": 4096,
+    "topP": 1
+  },
+  "ragId": 1,
+  "updatedDate": "20240715221142"
+}
+```
+
+- `404`: `id`에 대응하는 메시지가 없는 경우
+- `400`: `id` 및 `messages`가 전달되지 않았을 경우
+
+### # DELETE /api/history
+
+> id에 대응하는 메시지 이력을 삭제
+
+**Query Parameters:**
+
+- `id` (required): 메시지 객체의 ID
+
+**Responses:**
+
+- `204`: 정상적으로 삭제됨
+- `404`: `id`에 대응하는 메시지가 없는 경우
+- `400`: `id`가 전달되지 않았을 경우
+
+### # GET /api/github
+
+> GitHub 정보를 반환
+
+**Responses:**
+
+- `200`: `GithubInfo` 객체를 반환
+
+```json
+{
+  "token": "ghtk-1234567890",
+  "url": "https://github.com",
+  "updatedDate": "20240715205141"
+}
+```
+
+### # PUT /api/github
+
+> GitHub 정보를 업데이트
+
+**Request Body**
+
+```json
+{
+  "token": "ghtk-1234567890",
+  "url": "https://github.com"
+}
+```
+
+**Responses:**
+
+- `201`: 수정된 `GithubInfo` 객체를 반환
+
+```json
+{
+  "token": "ghtk-1234567890",
+  "url": "https://github.com",
+  "updatedDate": "20240715205215"
+}
+```
+
+- `400`: `token`, `url`이 전달되지 않았을 경우
+
+### # GET /api/rags
+
+> RAG 전체 목록을 반환
+
+**Responses:**
+
+```json
+[
+  {
+    "id": 1,
+    "owner": "miracom-genai",
+    "repo": "next-slm-rag-playground",
+    "ragTargets": [],
+    "updatedDate": "20240715225038"
+  }
+]
+```
+
+### # GET /api/rag
+
+> id에 대응하는 RAG를 반환
+
+**Query Parameters:**
+
+- `id` (required): Rag 객체의 ID
+
+**Responses:**
+
+- `200`: id에 대응하는 Rag 객체를 반환
+
+```json
+{
+  "id": 1,
+  "owner": "miracom-genai",
+  "repo": "next-slm-rag-playground",
+  "ragTargets": [],
+  "updatedDate": "20240715225038"
+}
+```
+
+- `404`: `id`에 대응하는 Rag 객체가 없는 경우
+- `400`: `id`가 전달되지 않았을 경우
+
+### # POST /api/rag
+
+> Rag 객체를 생성
+
+**Request Body:**
+
+```json
+{
+  "owner": "miracom-genai",
+  "repo": "next-slm-rag-playground"
+}
+```
+
+**Responses:**
+
+- `201`: 생성된 Rag 객체를 반환
+
+```json
+{
+  "id": 1,
+  "owner": "miracom-genai",
+  "repo": "next-slm-rag-playground",
+  "ragTargets": [],
+  "updatedDate": "20240715225038"
+}
+```
+
+- `400`: `owner` 또는 `repo`가 전달되지 않았을 경우
+
+### # POST /api/ragTarget
+
+> Rag 객체의 RagTarget을 추가
+
+**Request Body:**
+
+```json
+{
+  "id": 1,
+  "ragTarget": {
+    "directory": "lib",
+    "fileType": "py"
+  }
+}
+```
+
+**Responses:**
+
+- `201`: 추가된 RagTarget 객체를 반환
+
+```json
+{
+  "id": 1,
+  "directory": "lib",
+  "fileType": "py",
+  "files": 748
+}
+```
+
+- `404`: `id`에 대응하는 Rag가 존재하지 않을 경우
+- `400`: `id` 또는 `ragTarget`이 전달되지 않았을 경우
+
+### # DELETE /api/ragTarget
+
+> Rag 객체의 RagTarget을 삭제
+
+**Query Parameters:**
+
+- `ragId` (required): Rag의 id
+- `ragTargetId` (required): RagTarget의 id
+
+**Responses:**
+
+- `204`: RagTarget이 정상적으로 삭제됨
+- `404`: `ragId` 또는 `ragTargetId`에 대응하는 객체가 존재하지 않을 경우
+- `400`: `ragId` 또는 `ragTargetId`이 전달되지 않았을 경우

@@ -1,5 +1,3 @@
-import { Rag } from "@/components/models/rags";
-
 //hello
 export interface SlmMessage {
   role: SlmMessageType;
@@ -26,7 +24,7 @@ export enum SlmMessageType {
 
 export interface SlmMessageHistory extends SlmModel {
   id: number;
-  rag: Rag;
+  ragId: number;
   updatedDate: string;
 }
 

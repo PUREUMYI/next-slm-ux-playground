@@ -41,7 +41,7 @@ export default async function handler(
         if (histories.length > 0) {
           histories[0].messages = messages;
           db.write();
-          res.status(200).json(histories[0]);
+          res.status(201).json(histories[0]);
         } else {
           res.status(404).end();
         }
