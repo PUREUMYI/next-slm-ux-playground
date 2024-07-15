@@ -62,7 +62,7 @@ export const GithubAdd = ({}) => {
   
   return (
     <div className="h-[600px] overflow-y-auto">
-      <div>
+      <div className="ml-4">
         <div id="step1">
           <h2 className="font-extrabold text-3xl">Step I. Github Info</h2>
           <h1 className="font-bold text-base text-gray-400">Change general settings on Gitnub RAG.</h1>
