@@ -3,6 +3,7 @@ export enum FileType {
   Java = "java",
   JavaScript = "js",
   TypeScript = "ts",
+  Markdown = "mdx",
 }
 
 export interface GithubInfo {
@@ -14,7 +15,7 @@ export interface GithubInfo {
 export interface Rag {
   id: number;
   owner: string;
-  repo: number;
+  repo: string;
   ragTargets: RagTarget[];
   updatedDate?: string;
 }
