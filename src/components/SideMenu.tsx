@@ -37,7 +37,7 @@ export const SideMenu = () => {
       disabled: true,
     },
     {
-      url: "/rags/search",
+      url: "/rags/github-list",
       name: "RAGs",
       icon: <Package className="h-4 w-4" />,
       token: "/rags",
