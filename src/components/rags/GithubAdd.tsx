@@ -21,10 +21,26 @@ import {
   TableRow
 } from "../ui/table";
 
+interface Item {
+  directory: String,
+  fileType: String,
+  fileCount: number,
+  progressRatio: number,
+}
+
+const fileTypes = [
+  {value: "py", name: "Python"},
+  {value: "java", name: "Java"},
+  {value: "js", name: "JavaScript"},
+  {value: "ts", name: "TypeScript"},
+]
+
 export const GithubAdd = ({}) => {
   const [isClone, setIsClone] = useState(false);
   const [badges, setBadges] = useState<String[]>([]);
+  const [fileType, setFileType] = useState('');
   const [directory, setDirectory] = useState('');
+  const [items, setItems] = useState<Item[]>([]);
 
   const handleClone = () => {
     setIsClone(true);
@@ -42,23 +58,21 @@ export const GithubAdd = ({}) => {
   };
 
   const handleAddTarget = () => {
-    console.log('handleAddTarget')
+    console.log('fileType : ', fileType)
+    var data = {
+      directory: directory,
+      fileType: fileType,
+      fileCount: 40,
+      progressRatio: 77,
+    }
+
+    setItems([...items, data]);
   };
 
-  const items = [
-    {
-      directory: "Test",
-      fileType: "Javascript",
-      fileCount: "330",
-      progressRatio: 30,
-    },
-    {
-      directory: "Test2",
-      fileType: "Python",
-      fileCount: "567",
-      progressRatio: 50,
-    },
-  ]
+  const handleFileTypeName = (value) => {
+    const fileType = fileTypes.find(type => type.value === value);
+    return fileType ? fileType.name : '';
+  };
   
   return (
     <div className="h-[600px] overflow-y-auto">
@@ -97,15 +111,14 @@ export const GithubAdd = ({}) => {
           <div className="grid grid-cols-2 gap-4 mt-4"> 
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="file" className="font-extrabold">File Type</Label>
-              <Select>
+              <Select value={fileType} onValueChange={setFileType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select the file type to collect." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="py">Python</SelectItem>
-                  <SelectItem value="java">Java</SelectItem>
-                  <SelectItem value="js">JavaScript</SelectItem>
-                  <SelectItem value="ts">TypeScript</SelectItem>
+                  {fileTypes.map((type) => 
+                    <SelectItem value={type.value}>{type.name}</SelectItem>
+                  )}
                 </SelectContent>
               </Select>
             </div>
@@ -159,13 +172,13 @@ export const GithubAdd = ({}) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {items.map((items) => (
-                  <TableRow key={items.directory}>
-                    <TableCell className="font-medium">{items.directory}</TableCell>
-                    <TableCell>{items.fileType}</TableCell>
-                    <TableCell>{items.fileCount}</TableCell>
+                {items.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{item.directory}</TableCell>
+                    <TableCell>{handleFileTypeName(item.fileType)}</TableCell>
+                    <TableCell>{item.fileCount}</TableCell>
                     <TableCell>
-                      <Progress value={items.progressRatio} className="w-[90%]" />
+                      <Progress value={item.progressRatio} className="w-[90%]" />
                     </TableCell>
                     <TableCell className="text-right">
                       <PackageXIcon className="h-5 w-5 cursor-pointer" />
