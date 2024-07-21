@@ -30,7 +30,7 @@ export const SideMenu = () => {
       disabled: true,
     },
     {
-      url: "/underconstruction",
+      url: "/history/chathistory",
       name: "Chat History",
       icon: <FolderClock className="h-4 w-4" />,
       token: "/history",
